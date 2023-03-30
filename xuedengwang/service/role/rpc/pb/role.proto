@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message RoleInterface{}
+
+message RoleDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string name = 7;
+  string code = 8;
+}
+message RoleAll{
+  int64 ID = 1;
+  string name = 2;
+}
+message RoleAllResp{
+  repeated RoleAll roleAll = 1;
+}
+
+message GetRoleReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string searchValue = 3;
+}
+message GetRoleResp{
+  repeated RoleDao content = 1;
+  int64    totalElements = 2;
+}
+message GetRoleByIDReq{
+  int64 ID = 1;
+}
+message GetRoleByIDResp {
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string name = 7;
+  string code = 8;
+}
+message UpdateRoleReq {
+  string code = 1;
+  int64 roleID = 2;
+  string name = 3;
+  string remarks = 4;
+  int64 updateByID = 5;
+}
+message AddRoleReq{
+  string code = 1;
+  string name = 2;
+  string remarks = 4;
+  int64 byID = 5;
+}
+
+message DeleteRoleByIDReq{
+  int64 roleID = 1;
+}
+
+
+service role {
+  rpc roleAll (RoleInterface) returns(RoleAllResp);
+  rpc getRole  (GetRoleReq) returns (GetRoleResp);
+  rpc getRoleByID (GetRoleByIDReq) returns (GetRoleByIDResp);
+  rpc updateRole (UpdateRoleReq) returns (RoleInterface);
+  rpc addRole (AddRoleReq) returns (RoleInterface);
+  rpc deleteRoleByID (DeleteRoleByIDReq) returns (RoleInterface);
+
+}

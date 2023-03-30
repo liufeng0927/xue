@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message CourseInterface{}
+
+message CourseDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string coursename = 7;
+  string courseno = 8;
+}
+
+message CourseAllResp{
+  repeated CourseAll courseAll = 1;
+}
+message CourseAll{
+  int64 ID =1;
+  string name=2;
+}
+
+message GetCourseReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string searchValue = 3;
+}
+message GetCourseResp{
+  repeated CourseDao content = 1;
+  int64    totalElements = 2;
+}
+message GetCourseByIDReq{
+  int64 ID = 1;
+}
+message GetCourseByIDResp {
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string coursename = 7;
+  string courseno = 8;
+}
+message UpdateCourseReq {
+  string remarks = 1;
+  int64 ID = 2;
+  string coursename = 3;
+  string courseno = 4;
+  int64 updateByID = 5;
+}
+message AddCourseReq{
+  string remarks = 1;
+  string coursename = 2;
+  string courseno = 3;
+  int64 byID = 4;
+}
+
+message DeleteCourseByIDReq{
+  int64 courseID = 1;
+}
+
+
+service course {
+  rpc CourseAll (CourseInterface) returns(CourseAllResp);
+  rpc getCourse  (GetCourseReq) returns (GetCourseResp);
+  rpc getCourseByID (GetCourseByIDReq) returns (GetCourseByIDResp);
+  rpc updateCourse (UpdateCourseReq) returns (CourseInterface);
+  rpc addCourse (AddCourseReq) returns (CourseInterface);
+  rpc deleteRCourseByID (DeleteCourseByIDReq) returns (CourseInterface);
+
+}

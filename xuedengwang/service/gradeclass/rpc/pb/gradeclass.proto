@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message GradeClassInterface{}
+
+message GradeClassDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string name = 7;
+  string code = 8;
+  int32 grade = 9;
+  int32 clazz = 10;
+  int64 students = 11;
+}
+
+
+message GetGradeClassReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string searchValue = 3;
+}
+message GetGradeClassResp{
+  repeated GradeClassDao content = 1;
+  int64    totalElements = 2;
+}
+message GetGradeClassByIDReq{
+  int64 ID = 1;
+}
+message GetGradeClassByIDResp {
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string name = 7;
+  string code = 8;
+  int32 grade = 9;
+  int32 clazz = 10;
+  int64 students = 11;
+}
+message UpdateGradeClassReq {
+  string remarks = 1;
+  int64 ID = 2;
+  string code = 3;
+  int32 grade = 4;
+  int32 clazz = 5;
+  string name = 7;
+  int64 updateByID = 8;
+
+}
+message AddGradeClassReq{
+  string remarks = 1;
+  string code = 3;
+  int32 grade = 4;
+  int32 clazz = 5;
+  string name = 7;
+  int64 byID = 2;
+}
+
+message DeleteGradeClassByIDReq{
+  int64 gradeClassID = 1;
+}
+message GradeclassAll{
+  int64 ID=1;
+  string name=2;
+}
+message GradeclassAllResp{
+ repeated GradeclassAll gradeclassAll=1;
+}
+
+service gradeclass {
+
+  rpc gradeclassAll (GradeClassInterface) returns(GradeclassAllResp);
+  rpc getGradeClass  (GetGradeClassReq) returns (GetGradeClassResp);
+  rpc getGradeClassByID (GetGradeClassByIDReq) returns (GetGradeClassByIDResp);
+  rpc updateGradeClass (UpdateGradeClassReq) returns (GradeClassInterface);
+  rpc addGradeClass (AddGradeClassReq) returns (GradeClassInterface);
+  rpc deleteGradeClassByID (DeleteGradeClassByIDReq) returns (GradeClassInterface);
+
+}

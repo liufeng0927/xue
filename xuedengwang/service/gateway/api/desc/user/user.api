@@ -1,0 +1,172 @@
+syntax = "v1"
+
+info(
+    title: "用户实例"
+    desc: "用户实例"
+    version: "v1"
+)
+
+
+import (
+    "role/role.api"
+)
+
+type (
+    LoginReq {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+    LoginResp {
+        Role Role `json:"role"`
+        CreateTime string `json:"createTime"`
+        Sex string `json:"sex"`
+        UserIcon string `json:"userIcon"`
+        Username string `json:"username"`
+        Email string `json:"email"`
+        Realname string `json:"realname"`
+        Token string `json:"token"`
+    }
+)
+
+type (
+    DateTypeName {
+        Data []float32 `json:"data"`
+        Type string `json:"type"`
+        Name string `json:"name"`
+    }
+    Scores {
+        CategoryList []string `json:"categoryList"`
+        barEchartsSeriesList []*DateTypeName `json:"barEchartsSeriesList"`
+    }
+    HomeResp {
+        TeacherNums int64 `json:"teacherNums"`
+        Scores Scores `json:"scores"`
+        StudentNums int64 `json:"studentNums"`
+        ClassNums int64 `json:"classNums"`
+        CourseNums int64 `json:"courseNums"`
+    }
+)
+
+type (
+    UserIconResp {
+        UserIcon string `json:"userIcon"`
+    }
+)
+
+type (
+    updateInfoReq {
+        Realname string `json:"realname"`
+        Sex string `json:"sex"`
+        UserIcon string `json:"userIcon"`
+    }
+)
+
+
+type (
+    updatePwdReq {
+        NewPass string `json:"newPass"`
+        UsedPass string `json:"usedPass"`
+    }
+)
+
+type (
+    SendEmailReq {
+        Email string `form:"email,optional"`
+    }
+)
+
+type (
+    VerifyCodeReq {
+        Code string `form:"code"`
+    }
+)
+type (
+    UpdateEmailReq {
+        Email string `form:"email"`
+        Code string `form:"code"`
+    }
+)
+
+type (
+    GetUserReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+        Status string `form:"status,optional"`
+    }
+    User {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Password string `json:"password"`
+        Username string `json:"username"`
+        Realname string `json:"realname"`
+        Sex string `json:"sex"`
+        Status int32 `json:"status"`
+        Email string `json:"email"`
+        UserIcon string `json:"userIcon"`
+        SysRole Role `json:"sysRole"`
+    }
+
+    GetUserResp {
+        Content []*User `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+
+type (
+    UpdateUserReq {
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Password string `json:"password"`
+        Username string `json:"username"`
+        Realname string `json:"realname"`
+        Sex string `json:"sex"`
+        Status int32 `json:"status"`
+        Email string `json:"email"`
+        SysRoleID int64 `json:"sysRoleId"`
+    }
+)
+type (
+    AddUserReq {
+        Remarks string `json:"remarks"`
+        Password string `json:"password"`
+        Username string `json:"username"`
+        Realname string `json:"realname"`
+        Sex string `json:"sex"`
+        Status int32 `json:"status"`
+        Email string `json:"email"`
+        SysRoleID int64 `json:"sysRoleId"`
+    }
+)
+type (
+    GetUserByIDReq {
+        ID int64 `path:"id"`
+    }
+
+    GetUserByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Password string `json:"password"`
+        Username string `json:"username"`
+        Realname string `json:"realname"`
+        Sex string `json:"sex"`
+        Status int32 `json:"status"`
+        Email string `json:"email"`
+        UserIcon string `json:"userIcon"`
+        SysRoleID int64 `json:"sysRoleId"`
+    }
+)
+
+type (
+    DeleteUserByIDReq {
+        ID int64 `path:"id"`
+    }
+)

@@ -1,0 +1,81 @@
+syntax = "v1"
+
+type GradeClass {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Remarks string `json:"remarks"`
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    Code string `json:"code"`
+    Grade int32 `json:"grade"`
+    Clazz int32 `json:"clazz"`
+    Students int64 `json:"students"`
+}
+
+
+type (
+    GradeClassAllResp {
+        GradeClassAll []*GradeClassAll `json:"gradeClassAll"`
+    }
+    GradeClassAll {
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+    }
+)
+
+
+type (
+    GetGradeClassReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+    }
+    GetGradeClassResp {
+        Content []*GradeClass `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    GetGradeClassByIDReq {
+        ID int64 `path:"id"`
+    }
+    GetGradeClassByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Code string `json:"code"`
+        Grade int32 `json:"grade"`
+        Clazz int32 `json:"clazz"`
+        Students int64 `json:"students"`
+    }
+)
+type (
+    UpdateGradeClassReq {
+        Code string `json:"code"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Remarks string `json:"remarks"`
+        Grade int32 `json:"grade"`
+        Clazz int32 `json:"clazz"`
+    }
+)
+type (
+    AddGradeClassReq {
+        Code string `json:"code"`
+        Name string `json:"name"`
+        Remarks string `json:"remarks"`
+        Grade int32 `json:"grade"`
+        Clazz int32 `json:"clazz"`
+    }
+)
+type (
+    DeleteGradeClassByIDReq {
+        ID int64 `path:"id"`
+    }
+)

@@ -1,0 +1,80 @@
+syntax = "v1"
+
+
+import (
+    "course/course.api"
+    "user/user.api"
+    "student/student.api"
+    "gradeclass/gradeclass.api"
+)
+
+type Score {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Remarks string `json:"remarks"`
+    ID int64 `json:"id"`
+    Score float32 `json:"score"`
+    Type string `json:"type"`
+    Course string `json:"course"`
+    StudentName string `json:"studentName"`
+    Stuno string `json:"stuno"`
+    GradeClass string `json:"gradeClass"`
+}
+
+type (
+    GetScoresReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        GradeClassId int64 `form:"gradeClassId,optional"`
+        Stuno string `form:"stuno,optional"`
+        Name string `form:"name,optional"`
+        CourseId int64 `form:"courseId,optional"`
+    }
+    GetScoresResp {
+        Content []*Score `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    UpdateScoresReq {
+        ID int64 `json:"id"`
+        Score string `json:"score"`
+    }
+)
+type (
+    AddScoresReq {
+        CourseID int64 `json:"courseId"`
+        GradeClassID int64 `json:"gradeClassId"`
+    }
+)
+type (
+    DeleteScoresByIDReq {
+        ID int64 `path:"id"`
+    }
+)
+
+type (
+    GetScoreCensusReq {
+        GradeClassId int64 `form:"gradeClassId,optional"`
+        CourseId int64 `form:"courseId,optional"`
+    }
+    GetScoreCensusResp{
+        Census []*GetScoreCensus `json:"census"`
+    }
+    GetScoreCensus {
+        Name string `json:"name"`
+        Value int64 `json:"value"`
+    }
+)
+
+type (
+    GetScoresContrastCensusReq {
+        CourseId int64 `form:"courseId"`
+    }
+    GetScoresContrastCensusResp{
+        Scores Scores `json:"scores"`
+    }
+
+)

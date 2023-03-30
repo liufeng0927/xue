@@ -1,0 +1,71 @@
+syntax = "v1"
+
+
+type Role {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Remarks string `json:"remarks"`
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    Code string `json:"code"`
+}
+
+type (
+    RoleAllResp {
+        RoleAll []*RoleAll `json:"roleAll"`
+    }
+    RoleAll {
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+    }
+)
+
+
+type (
+    GetRoleReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+    }
+    GetRoleResp {
+        Content []*Role `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    GetRoleByIDReq {
+        ID int64 `path:"id"`
+    }
+    GetRoleByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Code string `json:"code"`
+    }
+)
+type (
+    UpdateRoleReq {
+        Code string `json:"code"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Remarks string `json:"remarks"`
+    }
+)
+type (
+    AddRoleReq {
+        Code string `json:"code"`
+        Name string `json:"name"`
+        Remarks string `json:"remarks"`
+    }
+)
+type (
+    DeleteRoleByIDReq {
+        ID int64 `path:"id"`
+    }
+)

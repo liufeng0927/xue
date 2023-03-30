@@ -1,0 +1,71 @@
+syntax = "v1"
+
+
+type Course {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Coursename string `json:"coursename"`
+    Courseno string `json:"courseno"`
+    ID int64 `json:"id"`
+    Remarks string `json:"remarks"`
+}
+
+type (
+    CourseAllResp {
+        CourseAll []*CourseAll `json:"courseAll"`
+    }
+    CourseAll {
+        ID int64 `json:"id"`
+        Name string `json:"name,optional"`
+    }
+)
+
+
+type (
+    GetCourseReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+    }
+    GetCourseResp {
+        Content []*Course `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    GetCourseByIDReq {
+        ID int64 `path:"id"`
+    }
+    GetCourseByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Coursename string `json:"coursename"`
+        Courseno string `json:"courseno"`
+        ID int64 `json:"id"`
+        Remarks string `json:"remarks"`
+    }
+)
+type (
+    UpdateCourseReq {
+        Coursename string `json:"coursename"`
+        Courseno string `json:"courseno"`
+        ID int64 `json:"id"`
+        Remarks string `json:"remarks"`
+    }
+)
+type (
+    AddCourseReq {
+        Coursename string `json:"coursename"`
+        Courseno string `json:"courseno"`
+        Remarks string `json:"remarks"`
+    }
+)
+type (
+    DeleteCourseByIDReq {
+        ID int64 `path:"id"`
+    }
+)

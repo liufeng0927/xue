@@ -1,0 +1,72 @@
+Name: gateway
+Host: 0.0.0.0
+Port: 8080
+Mode: dev
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 25200
+
+#验证码
+Captcha:
+  KeyLength: 6
+  ImgWidth: 240
+  ImgHeight: 80
+
+Log:
+  ServiceName: gateway-api
+  Level: info
+  Encoding: plain
+
+#rpc service
+UserRpcConf:
+  Endpoints:
+    - 0.0.0.0:8801
+  NonBlock: true
+
+RoleRpcConf:
+  Endpoints:
+    - 0.0.0.0:8802
+  NonBlock: true
+
+CourseRpcConf:
+  Endpoints:
+    - 0.0.0.0:8803
+  NonBlock: true
+
+TeacherRpcConf:
+  Endpoints:
+    - 0.0.0.0:8805
+  NonBlock: true
+
+StudentRpcConf:
+  Endpoints:
+    - 0.0.0.0:8804
+  NonBlock: true
+
+GradeClassRpcConf:
+  Endpoints:
+    - 0.0.0.0:8806
+  NonBlock: true
+
+ScoresRpcConf:
+  Endpoints:
+    - 0.0.0.0:8807
+  NonBlock: true
+
+DB:
+  Name: xueden_student_mangement_system
+  Addr: 0.0.0.0:3306
+  UserName: root
+  Password: root
+  ShowLog: true                   # 是否打印所有SQL日志
+  MaxIdleConn: 10                 # 最大闲置的连接数，0意味着使用默认的大小2， 小于0表示不使用连接池
+  MaxOpenConn: 60                 # 最大打开的连接数, 需要小于数据库配置中的max_connections数
+  ConnMaxLifeTime: 4h             # 单个连接最大存活时间，建议设置比数据库超时时长(wait_timeout)稍小一些
+  SlowThreshold: 200ms                # 慢查询阈值，设置后只打印慢查询日志，默认为200ms
+
+RbacConf:
+  Path: /deploy/rbac/conf/rbac_model.conf
+
+

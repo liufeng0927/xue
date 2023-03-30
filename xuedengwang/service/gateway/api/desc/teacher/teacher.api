@@ -1,0 +1,85 @@
+syntax = "v1"
+
+
+info(
+    title: "角色实例"
+    desc: "角色实例"
+    version: "v1"
+)
+import (
+    "course/course.api"
+)
+
+type Teacher {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Remarks string `json:"remarks"`
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    Teachno string `json:"teachno"`
+    Sex string `json:"sex"`
+    Phone string `json:"phone"`
+    QQ string `json:"qq"`
+    CourseName string `json:"courseName"`
+}
+
+type (
+    GetTeacherReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+    }
+    GetTeacherResp {
+        Content []*Teacher `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    GetTeacherByIDReq {
+        ID int64 `path:"id"`
+    }
+    GetTeacherByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Teachno string `json:"teachno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        CourseID int64 `json:"courseId"`
+    }
+)
+type (
+    UpdateTeacherReq {
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Teachno string `json:"teachno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        CourseID int64 `json:"courseId"`
+    }
+)
+type (
+    AddTeacherReq {
+        Remarks string `json:"remarks"`
+        Name string `json:"name"`
+        Teachno string `json:"teachno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        CourseID int64 `json:"courseId"`
+    }
+)
+type (
+    DeleteTeacherByIDReq {
+        ID int64 `path:"id"`
+    }
+)

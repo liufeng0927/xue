@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  ########################################    业务   ########################################
+
+  #网关api + 业务rpc
+  mandarin:
+    image: darklost/gomodd:latest # "macOs intel" or "linux amd"
+    #image: lyumikael/go-modd-env:v1.0.0  # macOs m1
+    container_name: xuedeng
+    ports:
+      - "8080:8080"
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      GOPROXY: https://goproxy.cn,direct
+    working_dir: /app/xuedeng
+    volumes:
+      - .:/app/xuedeng
+    privileged: true
+    restart: always
+    networks:
+      - xuedeng_net
+
+networks:
+  xuedeng_net:
+    driver: bridge

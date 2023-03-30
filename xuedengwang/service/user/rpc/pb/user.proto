@@ -1,0 +1,179 @@
+syntax = "proto3";
+//import "google/protobuf/empty.proto";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message UserInterface{}
+//model
+message Role{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string name = 7;
+  string code = 8;
+}
+message UserDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string password = 7;
+  string username = 8;
+  string realname = 9;
+  string sex = 10;
+  int32 status = 11;
+  string email = 12;
+  string userIcon = 13;
+  Role sysRole = 14;
+}
+
+
+message LoginReq{
+  string username = 1;
+  string password = 2;
+}
+message LoginResp{
+  Role role = 1;
+  string createTime = 2;
+  string sex = 3;
+  string userIcon = 4;
+  string username = 5;
+  string email = 8;
+  string realname = 6;
+  string token = 7;
+}
+
+
+message  DateTypeName {
+  repeated float data = 1;
+  string type = 2;
+  string name = 3;
+}
+message   Scores {
+  repeated string categoryList = 1;
+  repeated DateTypeName barEchartsSeriesList = 2;
+}
+
+
+message HomeResp{
+  int64 teacherNums = 1;
+  Scores scores = 2;
+  int64 studentNums = 3;
+  int64 classNums = 4;
+  int64 courseNums = 5;
+}
+
+
+message UpdateInfoReq{
+  string  realname = 1;
+  string sex = 2;
+  string userIcon = 3;
+  int64 userID = 4;
+}
+
+message UpdatePwdReq{
+  int64 userID = 1;
+  string newPass = 2;
+  string usedPass = 3;
+}
+
+message SendEmailReq{
+  string email = 1;
+  int64 userID = 2;
+}
+message VerifyCodeReq{
+  string code = 1;
+  int64 userID = 2;
+}
+
+message UpdateEmailReq{
+  int64 userID = 1;
+  string email = 2;
+}
+
+message GetUserReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string searchValue = 3;
+  string status = 4;
+}
+message GetUserResp{
+  repeated UserDao content = 1;
+  int64    totalElements = 2;
+}
+
+
+message GetUserByIDReq{
+  int64 ID = 1;
+}
+message GetUserByIDResp{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string password = 7;
+  string username = 8;
+  string realname = 9;
+  string sex = 10;
+  int32 status = 11;
+  string email = 12;
+  string userIcon = 13;
+  int64 sysRoleID = 14;
+}
+
+message UpdateUserReq{
+  string remarks = 1;
+  string password = 2;
+  string username = 3;
+  string realname = 4;
+  string sex = 5;
+  int32 status = 6;
+  string email = 7;
+  int64 roleID = 8;
+  int64 userID = 9;
+  int64 updateBy = 10;
+}
+message AddUserReq{
+  string remarks = 1;
+  string password = 2;
+  string username = 3;
+  string realname = 4;
+  string sex = 5;
+  int32 status = 6;
+  string email = 7;
+  int64 roleID = 8;
+  int64 ByID = 9;
+}
+
+message DeleteUserByIDReq{
+  int64 userID = 1;
+}
+
+
+//service
+service user {
+
+  rpc login (LoginReq) returns(LoginResp);
+  rpc home (UserInterface) returns (HomeResp);
+  rpc updateInfo (UpdateInfoReq) returns (UserInterface);
+  rpc updatePwd (UpdatePwdReq) returns (UserInterface);
+  rpc sendEmail (SendEmailReq) returns (UserInterface);
+  rpc verifyCode (VerifyCodeReq) returns (UserInterface);
+  rpc updateEmail (UpdateEmailReq) returns (UserInterface);
+  rpc getUser (GetUserReq) returns (GetUserResp);
+  rpc getUserByID (GetUserByIDReq) returns (GetUserByIDResp);
+  rpc updateUser (UpdateUserReq) returns (UserInterface);
+  rpc addUser (AddUserReq) returns (UserInterface);
+  rpc deleteUserByID (DeleteUserByIDReq) returns (UserInterface);
+
+}

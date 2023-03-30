@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message StudentInterface{}
+
+message StudentDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string stuno = 7;
+  string sex = 8;
+  string phone = 9;
+  string QQ = 10;
+  string GradeClassName = 11;
+  string name=12;
+}
+
+message GetStudentReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string searchValue = 3;
+}
+message GetStudentResp{
+  repeated StudentDao content = 1;
+  int64    totalElements = 2;
+}
+message GetStudentByIDReq{
+  int64 ID = 1;
+}
+message GetStudentByIDResp {
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  int64 ID = 6;
+  string stuno = 7;
+  string sex = 8;
+  string phone = 9;
+  string QQ = 10;
+  int64 GradeClassID=11;
+  string name=12;
+  string GradeClassName=13;
+}
+message UpdateStudentReq {
+  string remarks = 1;
+  int64 ID = 2;
+  string stuno = 3;
+  string sex = 4;
+  string phone = 5;
+  string QQ = 6;
+  int64 GradeClassID = 7;
+  int64 updateByID=8;
+  string name=9;
+}
+message AddStudentReq{
+  string remarks = 1;
+  string stuno = 3;
+  string sex = 4;
+  string phone = 5;
+  string QQ = 6;
+  int64 GradeClassID = 7;
+  int64 byID = 8;
+  string name=9;
+}
+
+message DeleteStudentByIDReq{
+  int64 StudentID = 1;
+}
+
+
+service student {
+  rpc getStudent (GetStudentReq) returns (GetStudentResp);
+  rpc getStudentByID (GetStudentByIDReq) returns (GetStudentByIDResp);
+  rpc updateStudent (UpdateStudentReq) returns (StudentInterface);
+  rpc addStudent (AddStudentReq) returns (StudentInterface);
+  rpc deleteStudentByID (DeleteStudentByIDReq) returns (StudentInterface);
+}

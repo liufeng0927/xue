@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message ScoresInterface{}
+
+message ScoresDao{
+  string createTime = 1;
+  int64 createBy = 2;
+  string updateTime = 3;
+  int64 updateBy = 4;
+  string remarks = 5;
+  float score = 6;
+  string type = 7;
+  string course = 8;
+  string stuno = 9;
+  string gradeClass = 10;
+  string studentName = 11;
+  int64 ID = 12;
+}
+
+
+
+message GetScoresReq{
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  int64 gradeClassId = 3;
+  string stuno = 4;
+  string studentName = 5;
+  int64 courseId = 6;
+
+}
+message GetScoresResp{
+  repeated ScoresDao content = 1;
+  int64    totalElements = 2;
+}
+
+message Course{
+  int64 ID = 1;
+  string name = 2;
+}
+message Student{
+  int64 ID = 1;
+  string name = 2;
+}
+message GradeClass{
+  int64 ID = 1;
+  string name = 2;
+}
+message UpdateScoresReq {
+  float score = 2;
+  int64 updateByID = 8;
+  int64 ID = 7;
+}
+message AddScoresReq{
+  int64 ByID = 1;
+  int64  courseID = 4;
+  int64 gradeClassID = 6;
+}
+
+message DeleteScoresByIDReq{
+  int64 ScoresID = 1;
+}
+
+message  GetScoreCensusReq{
+  int64 gradeClassId = 1;
+  int64 courseId = 2;
+}
+message GetScoreCensusResp{
+  repeated Census census=1;
+}
+message Census{
+  string name = 1;
+  int64 value = 2;
+}
+message  DateType {
+  repeated float data = 1;
+  string type = 2;
+  string name = 3;
+}
+message GetScoresContrastCensusReq{
+  int64 courseId = 1;
+}
+
+message   ScoresContrastCensus {
+  repeated string categoryList = 1;
+  repeated DateType barEchartsSeriesList = 2;
+}
+message   GetScoresContrastCensusResp {
+   ScoresContrastCensus scoresContrastCensus = 1;
+}
+service Score {
+  rpc getScores (GetScoresReq) returns (GetScoresResp);
+  rpc updateScores (UpdateScoresReq) returns (ScoresInterface);
+  rpc addScores (AddScoresReq) returns (ScoresInterface);
+  rpc deleteScoresByID (DeleteScoresByIDReq) returns (ScoresInterface);
+  rpc getScoreCensus (GetScoreCensusReq) returns (GetScoreCensusResp);
+  rpc getScoresContrastCensus (GetScoresContrastCensusReq) returns (GetScoresContrastCensusResp);
+
+}

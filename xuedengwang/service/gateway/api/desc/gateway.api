@@ -1,0 +1,294 @@
+syntax = "v1"
+
+import (
+	"user/user.api"
+	"role/role.api"
+	"student/student.api"
+	"course/course.api"
+	"teacher/teacher.api"
+	"gradeclass/gradeclass.api"
+	"scores/scores.api"
+)
+
+type (
+	Interface {
+	}
+)
+
+//========================> sys v1 <========================
+//no need auth and login
+@server(
+	group: sys
+)
+service gateway {
+	@doc "login"
+	@handler login
+	post /login (LoginReq) returns (LoginResp)
+	
+	@doc "logout"
+	@handler logout
+	get /loginOut returns (Interface)
+}
+
+//need auth and login
+@server(
+	group: user
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "home"
+	@handler home
+	get /home returns (HomeResp)
+	
+	@doc "getUser"
+	@handler getUser
+	get /user (GetUserReq) returns (GetUserResp)
+	
+	@doc "updateUser"
+	@handler updateUser
+	put /user (UpdateUserReq) returns (Interface)
+	
+	@doc "addUser"
+	@handler addUser
+	post /user (AddUserReq) returns (Interface)
+	
+	@doc "getUserByID"
+	@handler getUserByID
+	get /user/:id (GetUserByIDReq) returns (GetUserByIDResp)
+	
+	@doc "deleteUserByID"
+	@handler deleteUserByID
+	delete /user/:id (DeleteUserByIDReq) returns (Interface)
+}
+
+//========================> user v1 <========================
+//no need auth and login
+@server(
+	prefix: user
+	group: user
+)
+service gateway {
+	@doc "icon"
+	@handler userIcon
+	post /userIcon returns (UserIconResp)
+}
+
+// need auth and login
+@server(
+	prefix: user
+	group: user
+	middleware: JwtAuth
+)
+service gateway {
+	@doc "updateInfo"
+	@handler updateInfo
+	put /updateInfo (updateInfoReq) returns (Interface)
+	
+	@doc "updatePwd"
+	@handler updatePwd
+	put /updatePwd (updatePwdReq) returns (Interface)
+	
+	@doc "sendEmail"
+	@handler sendEmail
+	get /sendEmail (SendEmailReq) returns (Interface)
+	
+	@doc "verifyCode"
+	@handler verifyCode
+	get /verifyCode (VerifyCodeReq) returns (Interface)
+	
+	@doc "updateEmail"
+	@handler updateEmail
+	put /updateEmail (UpdateEmailReq) returns (Interface)
+}
+
+//========================> role v1 <========================
+// need auth and login
+@server(
+	group: role
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "roleAll"
+	@handler roleAll
+	get /role/all returns (RoleAllResp)
+	
+	@doc "getRole"
+	@handler getRole
+	get /role (GetRoleReq) returns (GetRoleResp)
+	
+	@doc "getRoleByID"
+	@handler getRoleByID
+	get /role/:id (GetRoleByIDReq) returns (GetRoleByIDResp)
+	
+	@doc "updateRole"
+	@handler updateRole
+	put /role (UpdateRoleReq) returns (Interface)
+	
+	@doc "addRole"
+	@handler addRole
+	post /role (AddRoleReq) returns (Interface)
+	
+	@doc "deleteRoleByID"
+	@handler deleteRoleByID
+	delete /role/:id (DeleteRoleByIDReq) returns (Interface)
+}
+
+//========================> gradeclass v1 <========================
+// need auth and login
+@server(
+	group: gradeclass
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "gradeclassAll"
+	@handler gradeclassAll
+	get /gradeclass/all returns (GradeClassAllResp)
+	
+	@doc "getGradeclass"
+	@handler getGradeclass
+	get /gradeclass (GetGradeClassReq) returns (GetGradeClassResp)
+	
+	@doc "getGradeclassByID"
+	@handler getGradeclassByID
+	get /gradeclass/:id (GetGradeClassByIDReq) returns (GetGradeClassByIDResp)
+	
+	@doc "updateGradeclass"
+	@handler updateGradeclass
+	put /gradeclass (UpdateGradeClassReq) returns (Interface)
+	
+	@doc "addGradeclass"
+	@handler addGradeclass
+	post /gradeclass (AddGradeClassReq) returns (Interface)
+	
+	@doc "deleteGradeclassByID"
+	@handler deleteGradeclassByID
+	delete /gradeclass/:id (DeleteGradeClassByIDReq) returns (Interface)
+}
+
+//========================> course v1 <========================
+// need auth and login
+@server(
+	group: course
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "courseAll"
+	@handler courseAll
+	get /course/all returns (CourseAllResp)
+	
+	@doc "getCourse"
+	@handler getCourse
+	get /course (GetCourseReq) returns (GetCourseResp)
+	
+	@doc "getCourseByID"
+	@handler getCourseByID
+	get /course/:id (GetCourseByIDReq) returns (GetCourseByIDResp)
+	
+	@doc "updateCourse"
+	@handler updateCourse
+	put /course (UpdateCourseReq) returns (Interface)
+	
+	@doc "addCourse"
+	@handler addCourse
+	post /course (AddCourseReq) returns (Interface)
+	
+	@doc "deleteCourseByID"
+	@handler deleteCourseByID
+	delete /course/:id (DeleteCourseByIDReq) returns (Interface)
+}
+
+//========================> student v1 <========================
+// need auth and login
+@server(
+	group: student
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "getStudent"
+	@handler getStudent
+	get /student (GetStudentReq) returns (GetStudentResp)
+	
+	@doc "getStudentByID"
+	@handler getStudentByID
+	get /student/:id (GetStudentByIDReq) returns (GetStudentByIDResp)
+	
+	@doc "updateStudent"
+	@handler updateStudent
+	put /student (UpdateStudentReq) returns (Interface)
+	
+	@doc "addStudent"
+	@handler addStudent
+	post /student (AddStudentReq) returns (Interface)
+	
+	@doc "deleteStudentByID"
+	@handler deleteStudentByID
+	delete /student/:id (DeleteStudentByIDReq) returns (Interface)
+}
+
+//========================> teacher v1 <========================
+// need auth and login
+@server(
+	group: teacher
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "getTeacher"
+	@handler getTeacher
+	get /teacher (GetTeacherReq) returns (GetTeacherResp)
+	
+	@doc "getTeacherByID"
+	@handler getTeacherByID
+	get /teacher/:id (GetTeacherByIDReq) returns (GetTeacherByIDResp)
+	
+	@doc "updateTeacher"
+	@handler updateTeacher
+	put /teacher (UpdateTeacherReq) returns (Interface)
+	
+	@doc "addTeacher"
+	@handler addTeacher
+	post /teacher (AddTeacherReq) returns (Interface)
+	
+	@doc "deleteTeacherByID"
+	@handler deleteTeacherByID
+	delete /teacher/:id (DeleteTeacherByIDReq) returns (Interface)
+}
+
+//========================> scores v1 <========================
+// need auth and login
+
+@server(
+	group: scores
+	middleware: JwtAuth
+)
+
+service gateway {
+	@doc "getScores"
+	@handler getScores
+	get /scores (GetScoresReq) returns (GetScoresResp)
+	
+	@doc "updateScores"
+	@handler updateScores
+	put /scores (UpdateScoresReq) returns (Interface)
+	
+	@doc "addScores"
+	@handler addScores
+	post /scores (AddScoresReq) returns (Interface)
+	
+	@doc "deleteScoresByID"
+	@handler deleteScoresID
+	delete /scores/:id (DeleteScoresByIDReq) returns (Interface)
+	
+	@doc "getScoreCensus"
+	@handler getScoreCensus
+	get /scores/getScoreCensus (GetScoreCensusReq) returns (GetScoreCensusResp)
+	
+	@doc "getScoresContrastCensus"
+	@handler getScoresContrastCensus
+	get /scores/getScoresContrastCensus (GetScoresContrastCensusReq) returns (GetScoresContrastCensusResp)
+}

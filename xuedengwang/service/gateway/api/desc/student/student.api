@@ -1,0 +1,80 @@
+syntax = "v1"
+
+
+
+type Student {
+    CreateTime string `json:"createTime"`
+    CreateBy int64 `json:"createBy"`
+    UpdateTime string `json:"updateTime"`
+    UpdateBy int64 `json:"updateBy"`
+    Remarks string `json:"remarks"`
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    Stuno string `json:"stuno"`
+    Sex string `json:"sex"`
+    Phone string `json:"phone"`
+    QQ string `json:"qq"`
+    GradeClassName string `json:"gradeClassName"`
+}
+
+type (
+    GetStudentReq {
+        PageIndex int32 `form:"pageIndex"`
+        PageSize int32 `form:"pageSize"`
+        SearchValue string `form:"searchValue,optional"`
+    }
+    GetStudentResp {
+        Content []*Student `json:"content"`
+        TotalElements int64 `json:"totalElements"`
+    }
+)
+type (
+    GetStudentByIDReq {
+        ID int64 `path:"id"`
+    }
+    GetStudentByIDResp {
+        CreateTime string `json:"createTime"`
+        CreateBy int64 `json:"createBy"`
+        UpdateTime string `json:"updateTime"`
+        UpdateBy int64 `json:"updateBy"`
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Stuno string `json:"stuno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        GradeClassID int64 `json:"gradeClassId"`
+    }
+)
+type (
+    UpdateStudentReq {
+        Remarks string `json:"remarks"`
+        ID int64 `json:"id"`
+        Name string `json:"name"`
+        Stuno string `json:"stuno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        GradeClassId int64 `json:"gradeClassId"`
+    }
+)
+type (
+    AddStudentReq {
+        Remarks string `json:"remarks"`
+        Name string `json:"name"`
+        Stuno string `json:"stuno"`
+        Sex string `json:"sex"`
+        Phone string `json:"phone"`
+        QQ string `json:"qq"`
+        GradeClassID int64 `json:"gradeClassId"`
+    }
+)
+type (
+    DeleteStudentByIDReq {
+        ID int64 `path:"id"`
+    }
+)
+
+
+
